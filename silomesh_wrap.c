@@ -2693,7 +2693,9 @@ static swig_module_info swig_module = {swig_types, 1, 0, 0, 0, 0};
 
 
   extern void init_silo(char* filename);
-  extern void init_mesh(char* mname, int n_x, int n_y, int n_z);
+  extern void init_mesh(char* mname, int n_x, int n_y, int n_z,
+                        float low_x, float low_y, float low_z,
+                        float width_x, float width_y, float width_z);
   extern void init_var(char* vname);
   extern void set_value(float val, int ix, int iy, int iz);
   extern void finalize_var(void);
@@ -3013,6 +3015,12 @@ SWIGINTERN PyObject *_wrap_init_mesh(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   int arg2 ;
   int arg3 ;
   int arg4 ;
+  float arg5 ;
+  float arg6 ;
+  float arg7 ;
+  float arg8 ;
+  float arg9 ;
+  float arg10 ;
   int res1 ;
   char *buf1 = 0 ;
   int alloc1 = 0 ;
@@ -3022,12 +3030,30 @@ SWIGINTERN PyObject *_wrap_init_mesh(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
+  float val5 ;
+  int ecode5 = 0 ;
+  float val6 ;
+  int ecode6 = 0 ;
+  float val7 ;
+  int ecode7 = 0 ;
+  float val8 ;
+  int ecode8 = 0 ;
+  float val9 ;
+  int ecode9 = 0 ;
+  float val10 ;
+  int ecode10 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  PyObject * obj6 = 0 ;
+  PyObject * obj7 = 0 ;
+  PyObject * obj8 = 0 ;
+  PyObject * obj9 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:init_mesh",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOOOOO:init_mesh",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6,&obj7,&obj8,&obj9)) SWIG_fail;
   res1 = SWIG_AsCharPtrAndSize(obj0, &buf1, NULL, &alloc1);
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "init_mesh" "', argument " "1"" of type '" "char *""'");
@@ -3048,9 +3074,39 @@ SWIGINTERN PyObject *_wrap_init_mesh(PyObject *SWIGUNUSEDPARM(self), PyObject *a
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "init_mesh" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = (int)(val4);
+  ecode5 = SWIG_AsVal_float(obj4, &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "init_mesh" "', argument " "5"" of type '" "float""'");
+  } 
+  arg5 = (float)(val5);
+  ecode6 = SWIG_AsVal_float(obj5, &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "init_mesh" "', argument " "6"" of type '" "float""'");
+  } 
+  arg6 = (float)(val6);
+  ecode7 = SWIG_AsVal_float(obj6, &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "init_mesh" "', argument " "7"" of type '" "float""'");
+  } 
+  arg7 = (float)(val7);
+  ecode8 = SWIG_AsVal_float(obj7, &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "init_mesh" "', argument " "8"" of type '" "float""'");
+  } 
+  arg8 = (float)(val8);
+  ecode9 = SWIG_AsVal_float(obj8, &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "init_mesh" "', argument " "9"" of type '" "float""'");
+  } 
+  arg9 = (float)(val9);
+  ecode10 = SWIG_AsVal_float(obj9, &val10);
+  if (!SWIG_IsOK(ecode10)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "init_mesh" "', argument " "10"" of type '" "float""'");
+  } 
+  arg10 = (float)(val10);
   {
     const char *err;
-    init_mesh(arg1,arg2,arg3,arg4);
+    init_mesh(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10);
     err = err_occurred();
     if (err) {
       PyErr_SetString(PyExc_RuntimeError, err);

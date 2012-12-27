@@ -7,7 +7,9 @@
 /* Function Declarations */
 
 void init_silo(char* filename);
-void init_mesh(char* mname, int n_x, int n_y, int n_z);
+void init_mesh(char* mname, int n_x, int n_y, int n_z,
+               float low_x, float low_y, float low_z,
+               float width_x, float width_y, float width_z);
 void init_var(char* vname);
 void set_value(float val, int ix, int iy, int iz);
 void finalize_var(void);
@@ -49,7 +51,9 @@ void init_silo(char* filename)
 }
 
 
-void init_mesh(char* mname, int nx, int ny, int nz)
+void init_mesh(char* mname, int nx, int ny, int nz,
+               float low_x, float low_y, float low_z,
+               float width_x, float width_y, float width_z)
 {
   
   float     *x,*y,*z;
@@ -70,9 +74,9 @@ void init_mesh(char* mname, int nx, int ny, int nz)
   x = (float*)malloc(sizeof(float)*(n_x+1));
   y = (float*)malloc(sizeof(float)*(n_y+1));
   z = (float*)malloc(sizeof(float)*(n_z+1));
-  for (ix=0; ix<=n_x; ix++) x[ix] = (float)ix;
-  for (iy=0; iy<=n_y; iy++) y[iy] = (float)iy;
-  for (iz=0; iz<=n_z; iz++) z[iz] = (float)iz;
+  for (ix=0; ix<=n_x; ix++) x[ix] = low_x+width_x*(float)ix;
+  for (iy=0; iy<=n_y; iy++) y[iy] = low_y+width_y*(float)iy;
+  for (iz=0; iz<=n_z; iz++) z[iz] = low_z+width_z*(float)iz;
   coords[0] = x; coords[1] = y; coords[2] = z;
 
   // add mesh to datafile  

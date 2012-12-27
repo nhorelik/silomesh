@@ -2,7 +2,9 @@
 %module silomesh
 %{
   extern void init_silo(char* filename);
-  extern void init_mesh(char* mname, int n_x, int n_y, int n_z);
+  extern void init_mesh(char* mname, int n_x, int n_y, int n_z,
+                        float low_x, float low_y, float low_z,
+                        float width_x, float width_y, float width_z);
   extern void init_var(char* vname);
   extern void set_value(float val, int ix, int iy, int iz);
   extern void finalize_var(void);
@@ -40,7 +42,9 @@
 }
 
 extern void init_silo(char* filename);
-extern void init_mesh(char* mname, int n_x, int n_y, int n_z);
+extern void init_mesh(char* mname, int n_x, int n_y, int n_z,
+                      float low_x, float low_y, float low_z,
+                      float width_x, float width_y, float width_z);
 extern void init_var(char* vname);
 extern void set_value(float val, int ix, int iy, int iz);
 extern void finalize_var(void);
