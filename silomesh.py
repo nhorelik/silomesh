@@ -67,8 +67,32 @@ except AttributeError:
 
 
 
+def init_silo(*args):
+  return _silomesh.init_silo(*args)
+init_silo = _silomesh.init_silo
+
 def init_mesh(*args):
   return _silomesh.init_mesh(*args)
 init_mesh = _silomesh.init_mesh
+
+def init_var(*args):
+  return _silomesh.init_var(*args)
+init_var = _silomesh.init_var
+
+def set_value(*args):
+  return _silomesh.set_value(*args)
+set_value = _silomesh.set_value
+
+def finalize_var():
+  return _silomesh.finalize_var()
+finalize_var = _silomesh.finalize_var
+
+def finalize_mesh():
+  return _silomesh.finalize_mesh()
+finalize_mesh = _silomesh.finalize_mesh
+
+def finalize_silo():
+  return _silomesh.finalize_silo()
+finalize_silo = _silomesh.finalize_silo
 
 
