@@ -3,6 +3,8 @@
 """
 setup.py file for distributing silomesh
 
+If the silo library is not in a standard location for your system, modify and
+use the library_dirs and include_dirs options to the Extension.
 
 """
 
@@ -13,6 +15,13 @@ import os
 silomesh_module = Extension('_silomesh',
                              sources=['silomesh.i',
                                       'silomesh.c'],
+                             libraries=['siloh5','hdf5'],
+                             library_dirs=[
+                             '/home/nhorelik/silo/silo-4.8-bsd/lib',
+                             '/home/nhorelik/hdf5/hdf5-1.8.9/hdf5/lib'],
+                             include_dirs=[
+                             '/home/nhorelik/silo/silo-4.8-bsd/include',
+                             '/home/nhorelik/hdf5/hdf5-1.8.9/hdf5/inlcude']
                              )
 
 setup (name = 'silomesh',

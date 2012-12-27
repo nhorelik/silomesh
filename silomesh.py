@@ -67,8 +67,8 @@ except AttributeError:
 
 
 
-def hello():
-  return _silomesh.hello()
-hello = _silomesh.hello
+def init_mesh(*args):
+  return _silomesh.init_mesh(*args)
+init_mesh = _silomesh.init_mesh
 
 

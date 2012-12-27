@@ -1,7 +1,7 @@
 /* silomesh.i */
 %module silomesh
 %{
-  extern void hello(void);
+  extern void init_mesh(char* filename);
 %}
 
-extern void hello(void);
+extern void init_mesh(char* filename);
