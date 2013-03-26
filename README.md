@@ -29,6 +29,6 @@ See the scripts in the examples directory.  The general flow is to
 4. Populate the mesh varible positions with data
 5. Finalize the mesh variable
 6. Finalize the mesh
-7. Finalize the SILO database to write everytihng to disk
+7. Finalize the SILO database to write everything to disk
 
 Multiple meshes can be added to the same database, and multiple variables can be added to each mesh.  Each mesh or variable must be finalized before the next mesh or variable is worked on.

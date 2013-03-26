@@ -119,7 +119,7 @@ void set_value(float val, int ix, int iy, int iz)
     return;
   }
 
-  k = (ix-1)*n_y*n_z + (iy-1)*n_z + (iz-1);
+  k = (iz-1)*n_x*n_y + (iy-1)*n_x + (ix-1);
   if (k > n_cells || k < 0) {
     sprintf(msg,"Indices (%i,%i,%i) out of range (1-%i,1-%i,1-%i).",ix,iy,iz,n_x,n_y,n_z);
     set_err(msg);
