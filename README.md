@@ -14,6 +14,10 @@ sudo apt-get install swig
 sudo apt-get install libsilo-dev
 sudo apt-get install libhdf5-openmpi-dev
 
+Foquick viewing you can use paraview:
+
+sudo apt-get install paraview
+
 Installation
 ============
 
