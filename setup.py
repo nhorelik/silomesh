@@ -16,12 +16,6 @@ silomesh_module = Extension('_silomesh',
                              sources=['silomesh.i',
                                       'silomesh.c'],
                              libraries=['siloh5','hdf5'],
-                             library_dirs=[
-                             '/home/nhorelik/silo/silo-4.8-bsd/lib',
-                             '/home/nhorelik/hdf5/install/lib'],
-                             include_dirs=[
-                             '/home/nhorelik/silo/silo-4.8-bsd/include',
-                             '/home/nhorelik/hdf5/install/inlcude']
                              )
 
 setup (name = 'silomesh',

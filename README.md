@@ -6,7 +6,13 @@ Python interface to create simple silo meshes from user data for visualization i
 Dependencies
 ============
 
-SILO 4.8 compiled with HDF5
+SWIG, and SILO 4.8 compiled with HDF5
+
+On ubuntu, these are satisfied with:
+
+sudo apt-get install swig
+sudo apt-get install libsilo-dev
+sudo apt-get install libhdf5-openmpi-dev
 
 Installation
 ============
