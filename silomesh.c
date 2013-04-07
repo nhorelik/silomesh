@@ -53,12 +53,13 @@ void init_silo(char* filename)
 
 void init_mesh(char* mname, int nx, int ny, int nz,
                float low_x, float low_y, float low_z,
-               float width_x, float width_y, float width_z)
+               float high_x, float high_y, float high_z)
 {
   
   float     *x,*y,*z;
   int       ix,iy,iz;
   float     *coords[3];
+  float     width_x, width_y, width_z;
  
   if (!activeSilo) {
     set_err("No active silo file! Must call init_silo first.");
@@ -67,6 +68,11 @@ void init_mesh(char* mname, int nx, int ny, int nz,
   
   meshname = mname;
   n_x = nx; n_y = ny; n_z = nz;
+  
+  // find mesh widths
+  width_x = (high_x - low_x) / (float) n_x;
+  width_y = (high_y - low_y) / (float) n_y;
+  width_z = (high_z - low_z) / (float) n_z;
   
   // setup dimensions and rectilinear coordinates
   n_cells = n_x*n_y*n_z;  
