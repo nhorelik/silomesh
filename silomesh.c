@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <silo.h>
 
 
@@ -43,6 +44,13 @@ float           *mesh_data;
 
 void init_silo(char* filename)
 {
+
+  if (activeSilo) {
+    set_err("SILO file already initialized! Must call finalize_silo before"
+            " initializing another file.");
+    return;
+  }
+
   // Initializae SILO database and abort on any errors
   DBShowErrors(DB_ABORT, NULL);
   dbfile = DBCreate(filename, DB_CLOBBER, DB_LOCAL, NULL, DB_HDF5);
@@ -66,7 +74,15 @@ void init_mesh(char* mname, int nx, int ny, int nz,
     return;
   }
   
-  meshname = mname;
+  if (activeMesh) {
+    set_err("Mesh already initialized! Must call finalize mesh before"
+            " initializing another one.");
+    return;
+  }
+  
+  meshname = malloc(strlen(mname));
+  strncpy(meshname,mname,strlen(mname));
+
   n_x = nx; n_y = ny; n_z = nz;
   
   // find mesh widths
@@ -77,9 +93,9 @@ void init_mesh(char* mname, int nx, int ny, int nz,
   // setup dimensions and rectilinear coordinates
   n_cells = n_x*n_y*n_z;  
   dims[0] = n_x+1; dims[1] = n_y+1; dims[2] = n_z+1; // dims of coords
-  x = (float*)malloc(sizeof(float)*(n_x+1));
-  y = (float*)malloc(sizeof(float)*(n_y+1));
-  z = (float*)malloc(sizeof(float)*(n_z+1));
+  x = malloc(sizeof(float)*(n_x+1));
+  y = malloc(sizeof(float)*(n_y+1));
+  z = malloc(sizeof(float)*(n_z+1));
   for (ix=0; ix<=n_x; ix++) x[ix] = low_x+width_x*(float)ix;
   for (iy=0; iy<=n_y; iy++) y[iy] = low_y+width_y*(float)iy;
   for (iz=0; iz<=n_z; iz++) z[iz] = low_z+width_z*(float)iz;
@@ -93,6 +109,7 @@ void init_mesh(char* mname, int nx, int ny, int nz,
   dims[0] = n_x; dims[1] = n_y; dims[2] = n_z;
   
   activeMesh = true;
+  
 }
 
 
@@ -105,11 +122,18 @@ void init_var(char* vname)
     set_err("No active mesh! Must call init_mesh first.");
     return;
   }
+  
+  if (activeVar) {
+    set_err("Variable already initialized! Must call finalize_var before"
+            " initializing another one.");
+    return;
+  }
 
-  varname = vname;
+  varname = malloc(strlen(vname));
+  strncpy(varname,vname,strlen(vname));
 
   // initialize the data array
-  mesh_data = (float*)malloc(sizeof(float)*n_cells);
+  mesh_data = malloc(sizeof(float)*n_cells);
   for (i=0; i<n_cells; i++) mesh_data[i] = 0.0;
   
   activeVar = true;
@@ -148,6 +172,8 @@ void finalize_var(void)
   DBPutQuadvar1(dbfile, varname, meshname, mesh_data, dims, 3, NULL, 0, DB_FLOAT, DB_ZONECENT, NULL);
   free(mesh_data);
   
+  free(varname);
+  
   activeVar = false;
 }
 
@@ -158,6 +184,8 @@ void finalize_mesh(void)
     set_err("No active silo file! Must call init_silo first.");
     return;
   }
+
+  free(meshname);
   
   activeMesh = false;
 }
