@@ -48,6 +48,7 @@ void init_silo(char* filename)
   if (activeSilo) {
     set_err("SILO file already initialized! Must call finalize_silo before"
             " initializing another file.");
+    if (meshname) free(meshname); if (varname) free (varname);
     return;
   }
 
@@ -71,17 +72,18 @@ void init_mesh(char* mname, int nx, int ny, int nz,
  
   if (!activeSilo) {
     set_err("No active silo file! Must call init_silo first.");
+    if (meshname) free(meshname); if (varname) free (varname);
     return;
   }
   
   if (activeMesh) {
     set_err("Mesh already initialized! Must call finalize mesh before"
             " initializing another one.");
+    if (meshname) free(meshname); if (varname) free (varname);
     return;
   }
   
-  meshname = malloc(strlen(mname));
-  strncpy(meshname,mname,strlen(mname));
+  meshname = strdup(mname);
 
   n_x = nx; n_y = ny; n_z = nz;
   
@@ -120,17 +122,18 @@ void init_var(char* vname)
 
   if (!activeMesh) {
     set_err("No active mesh! Must call init_mesh first.");
+    if (meshname) free(meshname); if (varname) free (varname);
     return;
   }
   
   if (activeVar) {
     set_err("Variable already initialized! Must call finalize_var before"
             " initializing another one.");
+    if (meshname) free(meshname); if (varname) free (varname);
     return;
   }
 
-  varname = malloc(strlen(vname));
-  strncpy(varname,vname,strlen(vname));
+  varname = strdup(vname);
 
   // initialize the data array
   mesh_data = malloc(sizeof(float)*n_cells);
@@ -146,6 +149,7 @@ void set_value(float val, int ix, int iy, int iz)
 
   if (!activeVar) {
     set_err("No active variable! Must call init_var first.");
+    if (meshname) free(meshname); if (varname) free (varname);
     return;
   }
 
@@ -166,6 +170,7 @@ void finalize_var(void)
 
   if (!activeMesh) {
     set_err("No active mesh! Must call init_mesh first.");
+    if (meshname) free(meshname); if (varname) free (varname);
     return;
   }
 
@@ -182,6 +187,7 @@ void finalize_mesh(void)
 {
   if (!activeSilo) {
     set_err("No active silo file! Must call init_silo first.");
+    if (meshname) free(meshname); if (varname) free (varname);
     return;
   }
 
