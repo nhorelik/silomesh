@@ -16,9 +16,7 @@ On ubuntu, these are satisfied with:
 * sudo apt-get install libsilo-dev
 * sudo apt-get install libhdf5-openmpi-dev
 
-For quick viewing you can use paraview:
-
-* sudo apt-get install paraview
+For quick viewing you can use ParaView (http://www.paraview.org/).  Make sure to download the latest version from their website, as the SILO file reader may not be included in the version packaged for your system (silomesh is tested on ParaView version 3.98.1).
 
 Installation
 ============
